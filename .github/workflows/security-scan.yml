@@ -1,0 +1,25 @@
+name: Security Scan Pipeline
+
+on: 
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  worlflow_dispatch:
+
+env:
+  JAVA_VERSION: "21"
+  NODE_VERSION : '18'
+  MAVEN_OPTS: -xMX1024M
+jobs:
+  secret-scannig:
+    - name: Checkout código
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: GitLeak - Scan completo
+        run: |
+        echo "Executando Gitleaks com scan completo do código"
+        docker run --rm \
+        -v ${{github.workspacee}}
+
